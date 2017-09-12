@@ -10,7 +10,9 @@
 #import "MainViewController.h"
 #import "ModelViewController.h"
 #import "BaseNavigationController.h"
+#import "GuideViewController.h"
 
+#define DidStartApp @"DidStartApp"      // 标志已经启动过App
 
 @interface AppDelegate ()
 
@@ -22,9 +24,21 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     UIWindow *window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    MainViewController *viewController = [[MainViewController alloc] initWithTitle:@"首页" navType:NavTypeOnlyRightOne tabIndex:0];
-    BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:viewController];
-    window.rootViewController = nav;
+    
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:DidStartApp]) {
+        // 第一次启动,展示引导页
+        window.rootViewController = [[GuideViewController alloc] init];
+        
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:DidStartApp];
+        
+    } else {
+        // 已经启动过
+        MainViewController *viewController = [[MainViewController alloc] initWithTitle:@"首页" navType:NavTypeOnlyRightOne tabIndex:0];
+        BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:viewController];
+        window.rootViewController = nav;
+    
+    }
+    
     self.window = window;
     [window makeKeyAndVisible];
     

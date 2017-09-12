@@ -7,6 +7,7 @@
 //
 
 #import "MainViewController.h"
+#import "ADViewController.h"
 
 @interface MainViewController ()
 
@@ -22,7 +23,9 @@
 
     [super viewDidLoad];
     
-
+    ADViewController *adViewController = [[ADViewController alloc] init];
+    [[UIApplication sharedApplication].keyWindow addSubview:adViewController.view];
+    [self.navigationController addChildViewController:adViewController];
     
 }
 
