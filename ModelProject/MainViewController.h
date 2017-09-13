@@ -10,7 +10,7 @@
 
 @interface MainViewController : ModelViewController
 
-
+@property (assign, nonatomic) BOOL showAD;  // 是否展示广告图
 
 
 @end

@@ -34,6 +34,7 @@
     } else {
         // 已经启动过
         MainViewController *viewController = [[MainViewController alloc] initWithTitle:@"首页" navType:NavTypeOnlyRightOne tabIndex:0];
+        viewController.showAD = YES;    // 打开App，显示广告图
         BaseNavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:viewController];
         window.rootViewController = nav;
     

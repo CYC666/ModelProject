@@ -11,6 +11,9 @@
 
 @interface MainViewController ()
 
+@property (strong, nonatomic) ADViewController *adViewController;   // 需要持有一下，不然，代理方达无法执行
+
+
 @end
 
 @implementation MainViewController
@@ -23,13 +26,24 @@
 
     [super viewDidLoad];
     
-    ADViewController *adViewController = [[ADViewController alloc] init];
-    [[UIApplication sharedApplication].keyWindow addSubview:adViewController.view];
-    [self.navigationController addChildViewController:adViewController];
-    
 }
 
 #pragma mark ========================================私有方法=============================================
+
+- (void)setShowAD:(BOOL)showAD {
+
+    _showAD = showAD;
+    if (_showAD) {
+        
+        // 显示广告图
+        _adViewController = [[ADViewController alloc] init];
+        [[UIApplication sharedApplication].keyWindow addSubview:_adViewController.view];
+        
+    }
+
+}
+
+
 
 #pragma mark ========================================动作响应=============================================
 
